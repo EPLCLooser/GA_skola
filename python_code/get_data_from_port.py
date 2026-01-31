@@ -10,8 +10,8 @@ for port in ports:
     if "USB-enhet" in str(port):
         ard_port = str(port)[0:4]
 
-txt_dir = os.getcwd() + "\\python_code\\data.txt" # Could need to change depending on path
-baudrate = 115200
+txt_dir = os.getcwd() + "\\data.txt"
+baudrate = 115200 # Baudrate of arduino
 
 try:
     with open(txt_dir, "x") as f:
@@ -26,8 +26,8 @@ except FileExistsError:
 with open(txt_dir, "w") as f:
     f.write("") 
 
-#ser = serial.Serial(ard_port,baudrate,timeout=0.001)
-"""
+ser = serial.Serial(ard_port,baudrate,timeout=0.001)
+
 while True:
     data = ser.read(1)
     data += ser.read(ser.inWaiting())
@@ -36,4 +36,3 @@ while True:
         with open(txt_dir, "w") as f:
             f.write(data)
     sys.stdout.flush()
-"""

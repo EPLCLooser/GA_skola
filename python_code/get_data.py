@@ -6,7 +6,7 @@ from PIL import Image
 # Retrieved 2026-01-30, License - CC BY-SA 4.0
 files = []
 txt_file_name = None
-for file in os.listdir(os.getcwd() + "\\python_code"): # Could need to change depending on path <-------------
+for file in os.listdir(os.getcwd()):
     if file.endswith(".txt"):
         files.append(file)
         print(file)
@@ -17,7 +17,7 @@ while txt_file_name not in files:
     txt_file_name = input()
     if txt_file_name == "q":
         exit()
-txt_dir = os.getcwd() + "\\python_code\\" + txt_file_name # Could need to change depending on path <-------------
+txt_dir = os.getcwd() + "\\" + txt_file_name
 
 with open(txt_dir) as f:
     txt_arr = f.read().split()
@@ -55,8 +55,7 @@ def plot_graf(p0, t0):
     ax[0].plot(cansat_t,cansat_h, color = 'green')
     ax[1].plot(x_pres,y, color = 'red', linestyle = '--'); ax[1].set_title("Predicted pressure")
     ax[1].plot(cansat_p,cansat_h, color = 'green')
-    print(max(cansat_h))
-    print(cansat_h)
+    
     #Download figure as img
 
     def fig2img(fig):
