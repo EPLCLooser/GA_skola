@@ -26,9 +26,9 @@ value_arr = []
 for str in txt_arr:
     value_arr.append(str.split(";"))
 
-cansat_t = [float(x[1]) for x in value_arr]
-cansat_p = [float(x[2]) for x in value_arr]
-cansat_h = [int(x[-1]) for x in value_arr]
+cansat_t = [float(x[1]) for x in value_arr if int(x[-1]) in range(-5,1050)]
+cansat_p = [float(x[2]) for x in value_arr if int(x[-1]) in range(-5,1050)]
+cansat_h = [int(x[-1]) for x in value_arr if int(x[-1]) in range(-5,1050)]
 
 def get_data(lat, lon):
     r = requests.get(f'https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&current=temperature_2m,pressure_msl')
@@ -36,7 +36,6 @@ def get_data(lat, lon):
     temperature = json_code["current"]["temperature_2m"]
     pressure = json_code["current"]["pressure_msl"]
     return {"temperature":temperature, "pressure":pressure}
-
 
 # Argument_1: float representing temperature at 0 meters height above sea-level
 # Argument_2: float representing pressure at 0 meters height above sea-level
@@ -50,10 +49,26 @@ def plot_graf(p0, t0):
     k0 = t0 + 273.15
     # calculate the pressure from pressure and temperature at sea level as a function of height
     x_pres = [round(p0*((k0 - 0.0065*h)/k0)**5.256, 1) for h in y]
+
+    count = 0
+    delta_t = 0
+    delta_p = 0
+    for data in value_arr:
+        i = round(float(data[-1])/10)
+        if 100-i in range(0,100):
+            count += 1
+            print(i)
+            print(x_pres[100-i])
+            print(float(data[2]))
+            delta_t += abs(float(data[1]) - x_temp[100-i])
+            delta_p += abs(float(data[2]) - x_pres[100-i])
+    average_delta_p = delta_p/count
+    average_delta_t = delta_t/count
+    
     fig, ax = plt.subplots(1, 2, figsize = (10,8))
-    ax[0].plot(x_temp,y, color = 'red', linestyle = '--'); ax[0].set_title("Predicted temperature")
+    ax[0].plot(x_temp,y, color = 'red', linestyle = '--'); ax[0].set_title(f"temperature - Average devitation: {round(average_delta_t, 2)}")
     ax[0].plot(cansat_t,cansat_h, color = 'green')
-    ax[1].plot(x_pres,y, color = 'red', linestyle = '--'); ax[1].set_title("Predicted pressure")
+    ax[1].plot(x_pres,y, color = 'red', linestyle = '--'); ax[1].set_title(f"pressure - Average devitation: {round(average_delta_p, 2)}")
     ax[1].plot(cansat_p,cansat_h, color = 'green')
     
     #Download figure as img
@@ -70,7 +85,7 @@ def plot_graf(p0, t0):
     img = fig2img(fig)
 
     # Save image with the help of save() Function.
-    img.save('Plot image.png')
+    img.save('Plot_image.png')
     pass
 
 tem_pre_data = get_data(57.718323, 11.787872)
