@@ -2,7 +2,7 @@
 # Takes information from arduino through USB-port and writes it in a txt file
 
 from serial.tools import list_ports
-import serial, csv, time, sys, os
+import serial, sys, os
 
 ports = list_ports.comports()
 for port in ports:
