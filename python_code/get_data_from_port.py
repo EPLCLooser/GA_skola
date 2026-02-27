@@ -11,7 +11,7 @@ for port in ports:
         ard_port = str(port)[0:4]
 
 txt_dir = os.getcwd() + "\\data.txt"
-baudrate = 115200 # Baudrate of arduino
+baudrate = 115200 # The baudrate of arduino
 
 try:
     with open(txt_dir, "x") as f:

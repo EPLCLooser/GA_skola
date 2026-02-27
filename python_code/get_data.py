@@ -81,7 +81,7 @@ def plot_graf(p0, t0):
         return img
 
     # Save return image in a variable by passing
-    # plot in the created function for Converting a plot to a PIL Image.
+    # Plot in the created function for Converting a plot to a PIL Image.
     img = fig2img(fig)
 
     # Save image with the help of save() Function.
