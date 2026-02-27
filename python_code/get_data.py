@@ -71,7 +71,7 @@ def plot_graf(p0, t0):
     ax[1].plot(x_pres,y, color = 'red', linestyle = '--'); ax[1].set_title(f"pressure - Average devitation: {round(average_delta_p, 2)}")
     ax[1].plot(cansat_p,cansat_h, color = 'green')
     
-    #Download figure as img
+    # Download figure as img
 
     def fig2img(fig):
         buf = io.BytesIO()
