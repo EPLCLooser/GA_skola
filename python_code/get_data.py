@@ -33,7 +33,6 @@ def plot_graf(p0, t0):
     #plt.show()
 
     #Download figure as img
-    """
     def fig2img(fig):
         buf = io.BytesIO()
         fig.savefig(buf)
@@ -47,7 +46,6 @@ def plot_graf(p0, t0):
 
     # Save image with the help of save() Function.
     img.save('Plot image.png')
-    """
     pass
 
 tem_pre_data = get_data(57.718323, 11.787872)

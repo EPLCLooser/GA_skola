@@ -46,10 +46,15 @@ void setup() {
   myFile.println("Hej 125");
   myFile.println("Hej 126");
   myFile.close();
+  
 }
 
 void loop() {
-
+  myFile = SD.open("example.txt", FILE_READ);
+  while(myFile.available()) {
+    Serial.print(myFile.read());
+  }
+  delay(100);
 }
 
 
