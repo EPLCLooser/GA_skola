@@ -27,10 +27,12 @@ def plot_graf(p0, t0):
     print(x_pres)
 
     fig, ax = plt.subplots(1, 2, figsize = (10,8))
-    ax[0].plot(x_temp,y, color = 'red', linestyle = '--'); ax[0].set_title("Predicted temperature")
-    ax[1].plot(x_pres,y, color = 'red', linestyle = '--'); ax[1].set_title("Predicted pressure")
-    #plt.plot(x, y)
-    #plt.show()
+    ax[0].plot(x_temp,y, color = 'red', linestyle = '--'); ax[0].set_title(f"temperature - Average devitation: {round(average_delta_t, 2)}")
+    ax[0].plot(cansat_t,cansat_h, color = 'green')
+    ax[1].plot(x_pres,y, color = 'red', linestyle = '--'); ax[1].set_title(f"pressure - Average devitation: {round(average_delta_p, 2)}")
+    ax[1].plot(cansat_p,cansat_h, color = 'green')
+    
+    # Download figure as img
 
     #Download figure as img
     def fig2img(fig):
@@ -41,7 +43,7 @@ def plot_graf(p0, t0):
         return img
 
     # Save return image in a variable by passing
-    # plot in the created function for Converting a plot to a PIL Image.
+    # Plot in the created function for Converting a plot to a PIL Image.
     img = fig2img(fig)
 
     # Save image with the help of save() Function.
