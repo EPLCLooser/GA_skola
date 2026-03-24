@@ -73,7 +73,7 @@ void loop() {
   myFile.close();
   myFile = SD.open("data.txt", FILE_READ);
   while(myFile.available()) {
-    Serial.print(myFile.read());
+    Serial.print((char)myFile.read());
   }
-  delay(1000);
+  delay(100);
 }
